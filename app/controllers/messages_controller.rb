@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       flash[:success] = 'Message が正常に投稿されました'
-      redirect_to message_path
+      redirect_to @message
     else
       flash.now[:danger] = 'Message が投稿されませんでした'
       render :new
@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
   def update
     if @message.update(message_params)
       flash[:success] = 'Message は正常に更新されました'
-      redirect_to message_path
+      redirect_to @message
     else
       flash.now[:danger] = 'Message は更新されませんでした'
       render :edit
@@ -51,6 +51,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :title)
   end
 end
